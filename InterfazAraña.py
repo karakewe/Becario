@@ -189,7 +189,7 @@ def radar_chart(values):
 # Configuración de la aplicación Streamlit
 def main():
     st.title('Bienvenido a la Encuesta Rueda de la Vida')
-
+    bienvenida_encuesta()
     # Índice en la parte superior
     st.sidebar.markdown("""
     ### Índice
