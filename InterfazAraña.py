@@ -193,7 +193,6 @@ def main():
     # Índice en la parte superior
     st.sidebar.markdown("""
     ### Índice
-    - [Bienvenida](#bienvenida-encuesta)
     - [Bienestar Social](#bienestar-social)
     - [Bienestar Intelectual](#bienestar-intelectual)
     - [Bienestar Ocupacional](#bienestar-ocupacional)
