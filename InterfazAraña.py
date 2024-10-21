@@ -150,22 +150,6 @@ def bienestar_fisico():
         values.append(value)
     return np.mean(values)
 
-def bienvenida_encuesta():
-    st.write("""
-    Esta encuesta tiene como objetivo evaluar diferentes dimensiones de tu bienestar.
-    A través de una serie de preguntas, podrás reflexionar sobre aspectos importantes de tu vida en las siguientes áreas:
-    - Bienestar Social
-    - Bienestar Intelectual
-    - Bienestar Ocupacional
-    - Bienestar Emocional
-    - Bienestar Espiritual
-    - Bienestar Financiero
-    - Bienestar Físico
-
-    Por favor, responde cada pregunta con sinceridad. Al final de la encuesta, podrás ver un gráfico que refleja tu bienestar en cada una de estas dimensiones.
-    """)
-    return 0
-
 # Configuración de la aplicación Streamlit
 def radar_chart(values):
     categories = ['Social', 'Intelectual', 'Ocupacional', 'Emocional', 'Espiritual', 'Financiero', 'Físico']
@@ -187,36 +171,122 @@ def radar_chart(values):
     return fig
 
 # Configuración de la aplicación Streamlit
+def feedback(scores):
+    feedbacks = []
+    for score in scores:
+        if score <= 0.5:
+            feedbacks.append("Bajo: Considera estrategias para mejorar tu bienestar en esta área.")
+        elif score <= 1.5:
+            feedbacks.append("Medio: Estás en un buen camino, pero hay áreas que podrías fortalecer.")
+        else:
+            feedbacks.append("Alto: ¡Excelente! Estás haciendo un gran trabajo en esta área.")
+    return feedbacks
+
 def main():
-    st.title('Bienvenido a la Encuesta Rueda de la Vida')
-    bienvenida_encuesta()
-    # Índice en la parte superior
-    st.sidebar.markdown("""
-    ### Índice
-    - [Bienestar Social](#bienestar-social)
-    - [Bienestar Intelectual](#bienestar-intelectual)
-    - [Bienestar Ocupacional](#bienestar-ocupacional)
-    - [Bienestar Emocional](#bienestar-emocional)
-    - [Bienestar Espiritual](#bienestar-espiritual)
-    - [Bienestar Financiero](#bienestar-financiero)
-    - [Bienestar Físico](#bienestar-fisico)
-    - [Resultados](#resultados)
-    """)
+    st.title('Bienvenido a la Rueda de la Vida')
 
-    # Llamar a las funciones de cada sección
-    scores = []
-    scores.append(bienestar_social())
-    scores.append(bienestar_intelectual())
-    scores.append(bienestar_ocupacional())
-    scores.append(bienestar_emocional())
-    scores.append(bienestar_espiritual())
-    scores.append(bienestar_financiero())
-    scores.append(bienestar_fisico())
+    # Inicializa la sesión para el estado actual
+    if 'current_page' not in st.session_state:
+        st.session_state.current_page = 0  # Comienza en la página 0 (Bienvenida)
 
-    # Generar y mostrar el gráfico de araña
-    if st.button('Mostrar Resultados'):
+    # Inicializa las puntuaciones si no están definidas
+    if 'scores' not in st.session_state:
+        st.session_state.scores = [0] * 7  # Inicializa las puntuaciones a cero para 7 áreas
+
+    # Define las páginas
+    pages = [
+        "Bienvenida",
+        "Bienestar Social",
+        "Bienestar Intelectual",
+        "Bienestar Ocupacional",
+        "Bienestar Emocional",
+        "Bienestar Espiritual",
+        "Bienestar Financiero",
+        "Bienestar Físico",
+        "Resultados"
+    ]
+
+    # Muestra el contenido de la página actual
+    page = pages[st.session_state.current_page]
+
+    if page == "Bienvenida":
+        st.write("""
+        Esta encuesta tiene como objetivo evaluar diferentes dimensiones de tu bienestar.
+        A través de una serie de preguntas, podrás reflexionar sobre aspectos importantes de tu vida en las siguientes áreas:
+        - Bienestar Social
+        - Bienestar Intelectual
+        - Bienestar Ocupacional
+        - Bienestar Emocional
+        - Bienestar Espiritual
+        - Bienestar Financiero
+        - Bienestar Físico
+
+        Por favor, responde cada pregunta con sinceridad. Al final de la encuesta, podrás ver un gráfico que refleja tu bienestar en cada una de estas dimensiones.
+        """)
+
+    elif page == "Bienestar Social":
+        st.header('Bienestar Social')
+        st.write('PUNTUACIÓN: Casi siempre = 2 puntos | A veces/ ocasionalmente = 1 punto | Muy raramente = 0 puntos')
+        st.session_state.scores[0] = bienestar_social()
+
+    elif page == "Bienestar Intelectual":
+        st.header('Bienestar Intelectual')
+        st.write('PUNTUACIÓN: Casi siempre = 2 puntos | A veces/ ocasionalmente = 1 punto | Muy raramente = 0 puntos')
+        st.session_state.scores[1] = bienestar_intelectual()
+
+    elif page == "Bienestar Ocupacional":
+        st.header('Bienestar Ocupacional')
+        st.write('PUNTUACIÓN: Casi siempre = 2 puntos | A veces/ ocasionalmente = 1 punto | Muy raramente = 0 puntos')
+        st.session_state.scores[2] = bienestar_ocupacional()
+
+    elif page == "Bienestar Emocional":
+        st.header('Bienestar Emocional')
+        st.write('PUNTUACIÓN: Casi siempre = 2 puntos | A veces/ ocasionalmente = 1 punto | Muy raramente = 0 puntos')
+        st.session_state.scores[3] = bienestar_emocional()
+
+    elif page == "Bienestar Espiritual":
+        st.header('Bienestar Espiritual')
+        st.write('PUNTUACIÓN: Casi siempre = 2 puntos | A veces/ ocasionalmente = 1 punto | Muy raramente = 0 puntos')
+        st.session_state.scores[4] = bienestar_espiritual()
+
+    elif page == "Bienestar Financiero":
+        st.header('Bienestar Financiero')
+        st.write('PUNTUACIÓN: Casi siempre = 2 puntos | A veces/ ocasionalmente = 1 punto | Muy raramente = 0 puntos')
+        st.session_state.scores[5] = bienestar_financiero()
+
+    elif page == "Bienestar Físico":
+        st.header('Bienestar Físico')
+        st.write('PUNTUACIÓN: Casi siempre = 2 puntos | A veces/ ocasionalmente = 1 punto | Muy raramente = 0 puntos')
+        st.session_state.scores[6] = bienestar_fisico()
+
+    elif page == "Resultados":
         st.header('Resultados')
-        st.pyplot(radar_chart(scores))
+        if all(score > 0 for score in st.session_state.scores):
+            st.pyplot(radar_chart(st.session_state.scores))
+            feedback_scores = feedback(st.session_state.scores)
+            for category, score in zip(['Social', 'Intelectual', 'Ocupacional', 'Emocional', 'Espiritual', 'Financiero', 'Físico'], feedback_scores):
+                st.write(f"{category}: {score}")
+        else:
+            st.warning("Por favor, completa todas las secciones antes de ver los resultados.")
+
+    # Botones de navegación
+    col1, col2 = st.columns(2)
+
+    # Botón "Página Anterior"
+    if st.session_state.current_page > 0:
+        with col1:
+            if st.button('Página Anterior'):
+                st.session_state.current_page -= 1
+                st.rerun()
+
+
+    # Botón "Siguiente Página"
+    if st.session_state.current_page < len(pages) - 1:
+        with col2:
+            if st.button('Siguiente Página'):
+                st.session_state.current_page += 1
+                st.rerun()
+   
 
 if __name__ == '__main__':
     main()
