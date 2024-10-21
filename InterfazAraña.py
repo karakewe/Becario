@@ -2,7 +2,6 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import numpy as np
 
-# Función para cada sección
 def bienestar_social():
     
     questions = [
@@ -188,6 +187,10 @@ def feedback(scores):
             feedbacks.append("Alto: ¡Excelente! Estás haciendo un gran trabajo en esta área.")
     return feedbacks
 
+def reruun():
+    st.rerun()
+    return 0
+    
 def main():
     st.title('Bienvenido a la Rueda de la Vida')
 
@@ -283,16 +286,13 @@ def main():
         with col1:
             if st.button('Página Anterior'):
                 st.session_state.current_page -= 1
-                st.rerun()
-
-
+                reruun()
     # Botón "Siguiente Página"
     if st.session_state.current_page < len(pages) - 1:
         with col2:
             if st.button('Siguiente Página'):
                 st.session_state.current_page += 1
-                st.rerun()
-   
+                reruun()
 
 if __name__ == '__main__':
     main()
