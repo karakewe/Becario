@@ -283,7 +283,7 @@ def main():
         with col1:
             if st.button('Página Anterior'):
                 st.session_state.current_page -= 1
-                st.experimental_rerun()
+                st.rerun()
 
 
     # Botón "Siguiente Página"
@@ -291,7 +291,7 @@ def main():
         with col2:
             if st.button('Siguiente Página'):
                 st.session_state.current_page += 1
-                st.experimental_rerun()
+                st.rerun()
    
 
 if __name__ == '__main__':
