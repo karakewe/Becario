@@ -4,8 +4,6 @@ import numpy as np
 
 # Función para cada sección
 def bienestar_social():
-    st.header('Bienestar Social')
-    st.write('PUNTUACIÓN: Casi siempre = 2 puntos | A veces/ ocasionalmente = 1 punto | Muy raramente = 0 puntos')
     questions = [
         "Contribuyo con tiempo y/o dinero a proyectos sociales y comunitarios.",
         "Estoy comprometido con una vida de voluntariado.",
@@ -25,8 +23,7 @@ def bienestar_social():
     return np.mean(values)  # Retornar el promedio de las respuestas
 
 def bienestar_intelectual():
-    st.header('Bienestar Intelectual')
-    st.write('PUNTUACIÓN: Casi siempre = 2 puntos | A veces/ ocasionalmente = 1 punto | Muy raramente = 0 puntos')
+
     questions = [
         "Estoy interesado en aprender cosas nuevas.",
         "Trato de mantenerme al tanto de los asuntos actuales a nivel local, nacional e internacional.",
@@ -46,8 +43,7 @@ def bienestar_intelectual():
     return np.mean(values)
 
 def bienestar_ocupacional():
-    st.header('Bienestar Ocupacional')
-    st.write('PUNTUACIÓN: Casi siempre = 2 puntos | A veces/ ocasionalmente = 1 punto | Muy raramente = 0 puntos')
+    
     questions = [
         "Estoy contento con mi elección de carrera.",
         "Estoy buscando trabajar.",
@@ -67,8 +63,7 @@ def bienestar_ocupacional():
     return np.mean(values)
 
 def bienestar_emocional():
-    st.header('Bienestar Emocional')
-    st.write('PUNTUACIÓN: Casi siempre = 2 puntos | A veces/ ocasionalmente = 1 punto | Muy raramente = 0 puntos')
+ 
     questions = [
         "Puedo desarrollar y mantener relaciones cercanas.",
         "Acepto la responsabilidad de mis acciones.",
@@ -88,8 +83,7 @@ def bienestar_emocional():
     return np.mean(values)
 
 def bienestar_espiritual():
-    st.header('Bienestar Espiritual')
-    st.write('PUNTUACIÓN: Casi siempre = 2 puntos | A veces/ ocasionalmente = 1 punto | Muy raramente = 0 puntos')
+   
     questions = [
         "Me siento cómodo con mi vida espiritual.",
         "Existe una relación directa entre mis valores y acciones.",
@@ -109,8 +103,7 @@ def bienestar_espiritual():
     return np.mean(values)
 
 def bienestar_financiero():
-    st.header('Bienestar Financiero')
-    st.write('PUNTUACIÓN: Casi siempre = 2 puntos | A veces/ ocasionalmente = 1 punto | Muy raramente = 0 puntos')
+  
     questions = [
         "¿Tienes efectivo en tu bolsillo?",
         "¿Equilibras tu presupuesto?",
@@ -130,8 +123,7 @@ def bienestar_financiero():
     return np.mean(values)
 
 def bienestar_fisico():
-    st.header('Bienestar Fisico')
-    st.write('PUNTUACIÓN: Casi siempre = 2 puntos | A veces/ ocasionalmente = 1 punto | Muy raramente = 0 puntos')
+  
     questions = [
         "Hago ejercicio aeróbico (vigoroso, continuo) durante 20 o 30 min. al menos 3 veces por semana.",
         "Como fruta, vegetales y granos integrales todos los días.",
