@@ -4,6 +4,7 @@ import numpy as np
 
 # Función para cada sección
 def bienestar_social():
+    
     questions = [
         "Contribuyo con tiempo y/o dinero a proyectos sociales y comunitarios.",
         "Estoy comprometido con una vida de voluntariado.",
@@ -23,7 +24,7 @@ def bienestar_social():
     return np.mean(values)  # Retornar el promedio de las respuestas
 
 def bienestar_intelectual():
-
+     
     questions = [
         "Estoy interesado en aprender cosas nuevas.",
         "Trato de mantenerme al tanto de los asuntos actuales a nivel local, nacional e internacional.",
@@ -43,7 +44,6 @@ def bienestar_intelectual():
     return np.mean(values)
 
 def bienestar_ocupacional():
-    
     questions = [
         "Estoy contento con mi elección de carrera.",
         "Estoy buscando trabajar.",
@@ -63,7 +63,7 @@ def bienestar_ocupacional():
     return np.mean(values)
 
 def bienestar_emocional():
- 
+
     questions = [
         "Puedo desarrollar y mantener relaciones cercanas.",
         "Acepto la responsabilidad de mis acciones.",
@@ -83,7 +83,7 @@ def bienestar_emocional():
     return np.mean(values)
 
 def bienestar_espiritual():
-   
+    
     questions = [
         "Me siento cómodo con mi vida espiritual.",
         "Existe una relación directa entre mis valores y acciones.",
@@ -103,7 +103,7 @@ def bienestar_espiritual():
     return np.mean(values)
 
 def bienestar_financiero():
-  
+    
     questions = [
         "¿Tienes efectivo en tu bolsillo?",
         "¿Equilibras tu presupuesto?",
@@ -123,7 +123,7 @@ def bienestar_financiero():
     return np.mean(values)
 
 def bienestar_fisico():
-  
+    
     questions = [
         "Hago ejercicio aeróbico (vigoroso, continuo) durante 20 o 30 min. al menos 3 veces por semana.",
         "Como fruta, vegetales y granos integrales todos los días.",
@@ -142,27 +142,41 @@ def bienestar_fisico():
         values.append(value)
     return np.mean(values)
 
+def bienvenida_encuesta():
+    st.write("""
+    Esta encuesta tiene como objetivo evaluar diferentes dimensiones de tu bienestar.
+    A través de una serie de preguntas, podrás reflexionar sobre aspectos importantes de tu vida en las siguientes áreas:
+    - Bienestar Social
+    - Bienestar Intelectual
+    - Bienestar Ocupacional
+    - Bienestar Emocional
+    - Bienestar Espiritual
+    - Bienestar Financiero
+    - Bienestar Físico
+
+    Por favor, responde cada pregunta con sinceridad. Al final de la encuesta, podrás ver un gráfico que refleja tu bienestar en cada una de estas dimensiones.
+    """)
+    return 0
+
 # Configuración de la aplicación Streamlit
 def radar_chart(values):
     categories = ['Social', 'Intelectual', 'Ocupacional', 'Emocional', 'Espiritual', 'Financiero', 'Físico']
     N = len(categories)
     angles = np.linspace(0, 2 * np.pi, N, endpoint=False).tolist()
 
-    # Close the chart loop
     values += values[:1]
     angles += angles[:1]
 
     fig, ax = plt.subplots(figsize=(6, 6), subplot_kw=dict(polar=True))
     ax.fill(angles, values, color='skyblue', alpha=0.4)
     ax.plot(angles, values, color='blue', linewidth=2, linestyle='solid')
-    ax.set_yticks(np.arange(0, 3, 1))  # Cambiado a rango 0-2
-    ax.set_yticklabels([])  # Desactivar etiquetas
+    ax.set_yticks(np.arange(0, 3, 1))
+    ax.set_yticklabels([])
     ax.set_xticks(angles[:-1])
     ax.set_xticklabels(categories, fontsize=12)
 
     return fig
 
-# Configuración de la aplicación Streamlit
 def feedback(scores):
     feedbacks = []
     for score in scores:
